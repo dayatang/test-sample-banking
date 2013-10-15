@@ -3,7 +3,6 @@ package org.dayatang.banking.application.impl;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import org.dayatang.banking.IoCUtils;
 import org.dayatang.banking.application.BankApplication;
 import org.dayatang.banking.domain.Account;
 import org.junit.After;
@@ -11,18 +10,33 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dayatang.domain.InstanceFactory;
+import com.dayatang.spring.factory.SpringInstanceProvider;
 
+@RunWith(SpringJUnit4ClassRunner.class) 
+@ContextConfiguration("/applicationContext-hibernate.xml") 
+@Transactional
 public class BankApplicationImplIntegrationTest {
 
+	@Autowired
 	private BankApplication instance;
+	
+	@Autowired
+	private ApplicationContext applicationContext;
+	
 	private Account from;
 	private Account to;
 
 	@BeforeClass
 	public static void classSetup() throws Exception {
-		IoCUtils.init();
+		//IoCUtils.init();
 	}
 
 	@AfterClass
@@ -31,7 +45,8 @@ public class BankApplicationImplIntegrationTest {
 	
 	@Before
 	public void beforeTest() {
-		instance = InstanceFactory.getInstance(BankApplication.class);
+		InstanceFactory.setInstanceProvider(new SpringInstanceProvider(applicationContext));
+		//instance = InstanceFactory.getInstance(BankApplication.class);
 	}
 	
 	@After
