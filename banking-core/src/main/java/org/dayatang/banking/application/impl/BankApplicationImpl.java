@@ -1,7 +1,11 @@
 package org.dayatang.banking.application.impl;
 
+import java.util.List;
+
 import org.dayatang.banking.application.BankApplication;
 import org.dayatang.banking.domain.Account;
+
+import com.dayatang.domain.AbstractEntity;
 
 public class BankApplicationImpl implements BankApplication {
 
@@ -40,5 +44,9 @@ public class BankApplicationImpl implements BankApplication {
 	public void transferFund(Account fromAccount, Account toAccount,
 			double amount) {
 		fromAccount.transferFundTo(toAccount, amount);
+	}
+
+	public List<Account> listAccounts() {
+		return AbstractEntity.findAll(Account.class);
 	}
 }

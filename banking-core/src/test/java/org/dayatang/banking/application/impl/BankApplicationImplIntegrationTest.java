@@ -53,6 +53,11 @@ public class BankApplicationImplIntegrationTest {
 		assertThat(instance.getAccountByName("abc"), is(from));
 		assertThat(instance.getAccountByName("xyz"), is(to));
 	}
+	
+	@Test
+	public void testListAccounts() {
+		
+	}
 
 	@Test
 	public void testCreateAccountWithName() {

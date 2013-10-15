@@ -1,0 +1,6 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE dataset SYSTEM "dataset.dtd">
+<dataset>
+    <ACCOUNTS version="0" id="1" name="张三" balance="100.0"/>
+    <ACCOUNTS version="0" id="2" name="李四" balance="1000.25"/>
+</dataset>

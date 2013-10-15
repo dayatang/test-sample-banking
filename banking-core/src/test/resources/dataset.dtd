@@ -1,0 +1,12 @@
+<!ELEMENT dataset (
+    ACCOUNTS*
+    )>
+
+<!ELEMENT ACCOUNTS EMPTY>
+<!ATTLIST ACCOUNTS
+    id CDATA #REQUIRED
+    version CDATA #REQUIRED
+    name CDATA #IMPLIED
+    balance CDATA #IMPLIED
+>
+

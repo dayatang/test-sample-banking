@@ -1,5 +1,7 @@
 package org.dayatang.banking.application;
 
+import java.util.List;
+
 import org.dayatang.banking.domain.Account;
 
 public interface BankApplication {
@@ -7,6 +9,7 @@ public interface BankApplication {
 	Account getAccountByName(String name);
 	Account createAccount(String name);
 	Account createAccount(String name, double balance);
+	List<Account> listAccounts();
 	void removeAccount(Account account);
 	void deposit(Account account, double amount);
 	void withdraw(Account account, double amount);
