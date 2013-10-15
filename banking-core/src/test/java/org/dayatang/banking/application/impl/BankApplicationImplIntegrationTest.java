@@ -65,9 +65,11 @@ public class BankApplicationImplIntegrationTest {
 		assertThat(instance.getAccountByName("李四").getName(), is("李四"));
 	}
 	
-	@Test
+	@Test(timeout = 10000)
 	public void testListAccounts() {
-		
+		for (int i = 0; i < 10000; i++) {
+			instance.listAccounts();
+		}
 	}
 
 
