@@ -100,7 +100,7 @@
 						<goals>
 							<goal>hbm2ddl</goal>
 						</goals>
-						<phase>test-compile</phase>
+						<phase>pre-integration-test</phase>
 					</execution>
 				</executions>
 				<dependencies>
@@ -139,7 +139,7 @@
 				<executions>
 					<execution>
 						<id>fill-test-data</id>
-						<phase>test-compile</phase>
+						<phase>pre-integration-test</phase>
 						<goals>
 							<goal>operation</goal>
 						</goals>
@@ -172,19 +172,22 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.16</version>
 				<configuration>
-					<encoding>${charset}</encoding>
-					<charset>${charset}</charset>
-					<configuration>
-						<includes>
-							<include>**/*Test.java</include>
-						</includes>
-						<excludes>
-							<exclude>**/Abstract*.java</exclude>
-							<exclude>**/*IntegrationTest.java</exclude>
-						</excludes>
-					</configuration>
+					<skip>true</skip>
 				</configuration>
 				<executions>
+					<execution>
+						<id>unit-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<skip>false</skip>
+							<excludes>
+								<exclude>**/*IntegrationTest.java</exclude>
+							</excludes>
+						</configuration>
+					</execution>
 					<execution>
 						<id>integration-test</id>
 						<phase>integration-test</phase>
@@ -192,6 +195,7 @@
 							<goal>test</goal>
 						</goals>
 						<configuration>
+							<skip>false</skip>
 							<includes>
 								<include>**/*IntegrationTest.java</include>
 							</includes>
