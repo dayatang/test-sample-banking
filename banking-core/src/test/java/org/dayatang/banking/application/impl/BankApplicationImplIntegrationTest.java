@@ -55,6 +55,7 @@ public class BankApplicationImplIntegrationTest {
 		
 	}
 
+
 	@Test
 	public void testCreateAccountWithName() {
 		Account account = instance.createAccount("newAccount");
