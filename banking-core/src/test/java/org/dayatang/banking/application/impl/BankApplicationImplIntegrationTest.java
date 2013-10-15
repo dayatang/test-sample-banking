@@ -32,26 +32,27 @@ public class BankApplicationImplIntegrationTest {
 	@Before
 	public void beforeTest() {
 		instance = InstanceFactory.getInstance(BankApplication.class);
-		from = instance.createAccount("abc", 1000);
-		to = instance.createAccount("xyz", 100);
 	}
 	
 	@After
 	public void afterTest() {
-		instance.removeAccount(from);
-		instance.removeAccount(to);
 	}
 	
 	@Test
 	public void testGetAccount() {
-		assertThat(instance.getAccount(from.getId()), is(from));
-		assertThat(instance.getAccount(to.getId()), is(to));
+		assertThat(instance.getAccount(1).getName(), is("张三"));
+		assertThat(instance.getAccount(2).getName(), is("李四"));
 	}
 
 	@Test
 	public void testGetAccountByName() {
-		assertThat(instance.getAccountByName("abc"), is(from));
-		assertThat(instance.getAccountByName("xyz"), is(to));
+		assertThat(instance.getAccountByName("张三").getName(), is("张三"));
+		assertThat(instance.getAccountByName("李四").getName(), is("李四"));
+	}
+	
+	@Test
+	public void testListAccounts() {
+		
 	}
 
 	@Test
@@ -84,6 +85,7 @@ public class BankApplicationImplIntegrationTest {
 
 	@Test
 	public void testDeposit() {
+		from = instance.getAccountByName("张三");
 		instance.deposit(from, 20);
 		from = instance.getAccount(from.getId());
 		assertEquals(1020.0, from.getBalance(), 0.0001);
@@ -91,12 +93,16 @@ public class BankApplicationImplIntegrationTest {
 
 	@Test
 	public void testWithdraw() {
+		from = instance.getAccountByName("张三");
 		instance.withdraw(from, 20);
+		from = instance.getAccount(from.getId());
 		assertEquals(980, from.getBalance(), 0.0001);
 	}
 
 	@Test
 	public void testTransferFund() {
+		from = instance.getAccountByName("张三");
+		to = instance.getAccountByName("李四");
 		instance.transferFund(from, to, 200);
 		assertEquals(800, from.getBalance(), 0.0001);
 		assertEquals(300, to.getBalance(), 0.0001);
